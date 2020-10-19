@@ -7,11 +7,16 @@
 <body>
   <div class ="restInfo">
   <p> Invite a pokemon to watch the sunrise with you  <input type="text" id = "pokefield" value=""> </p>
-  <img src="sunrise.jpg" id="monkey">
-  <div class="pokeholder">
-  <img id="pokemon">
+  <ul>
+    <li> enter lower-case pokemon name and press enter </li>
+    <li> suggestions: pikachu, squirtle, tyranitar </li>
+    <li> max of four at a time, refresh the page to clear </li>
+  </ul>
+  <img src="sunrise_2.jpg" id="sunrise">
+  <div id="pokeholder">
   </div>
   </div>
+  <div class="footer"><a href="https://github.com/Temmues/Creative_Project_2"> Github </a> </div>
 </body>
 <script>
   let input = document.querySelector("input");
@@ -23,9 +28,19 @@
           return response.json();
         }).then(function(json){
           let sprites = json.sprites;
-          console.log(sprites);
-          let pokemon = document.getElementById("pokemon");
+          let pokemon = document.createElement("img");
           pokemon.src = sprites.back_default;
+          let pokeholder = document.getElementById("pokeholder");
+          let numChildren = pokeholder.childNodes.length;
+          if(numChildren < 7)
+          {
+            if(numChildren > 3)
+            {
+              pokemon.style.transform = "rotateY(180deg)";
+
+            }
+            pokeholder.appendChild(pokemon);
+          }
         });
     }
   });
